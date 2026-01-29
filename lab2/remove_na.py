@@ -1,7 +1,7 @@
 import pandas as pd
 
 def remove_na(df: pd.DataFrame):
-    return df.dropna()
+    return df.dropna(axis="index")
 
 if __name__ == "__main__":
 
