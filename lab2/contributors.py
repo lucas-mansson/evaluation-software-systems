@@ -3,7 +3,8 @@ import matplotlib.pyplot as plt
 
 def contributors(file: str, n: int):
     data = pd.read_table(file, sep="|", names=["revision", "author", "datetime", "nbr_lines"])
-    data["datetime"] = pd.to_datetime(data["datetime"].str.replace(r"\+.*", "", regex=True))
+    formatted_date = data["datetime"].str.replace(r"\+.*", "", regex=True)
+    data["datetime"] = pd.to_datetime(formatted_date)
 
     data["author"].value_counts().head(n).plot(kind='bar', x="author", y="frequency")
     plt.tight_layout()
