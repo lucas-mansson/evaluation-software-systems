@@ -36,7 +36,7 @@ for i in range(python_n):
     if(jit == "jit"):
         subprocess.run(["java", "Measure",  inFile, java_results,  str(n), algoritm])
     else:
-        subprocess.run(["java", "Measure", "-Xint",  inFile, java_results,  str(n), algoritm])
+        subprocess.run(["java","-Xint", "Measure",  inFile, java_results,  str(n), algoritm])
 
     #läs ut-filen med 600 tider, räkna ut medelvärde i jämviktsläget, spara medelvärdet
     df = pd.read_csv(java_results)
