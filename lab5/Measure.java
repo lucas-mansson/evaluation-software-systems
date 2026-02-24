@@ -6,24 +6,41 @@ public class Measure {
         String inputFile = args[0];
         String outputFile = args[1];
         int n = Integer.parseInt(args[2]);
+		String algo = args[3];
+
 
         LinkedList<Integer> numbers = read(inputFile);
         try (PrintWriter writer = new PrintWriter(new FileWriter(outputFile))) {
 
             writer.println("index,time");
+			if(algo == "own"){
+				for (int i = 0; i < n; i++) {
+					LinkedList<Integer> temp1 = new LinkedList<>(numbers);
+					long start = System.nanoTime();
 
-            for (int i = 0; i < n; i++) {
-                LinkedList<Integer> temp1 = new LinkedList<>(numbers);
-                long start = System.nanoTime();
+					sortOwn(temp1);
 
-                sortC(temp1);
+					long end = System.nanoTime();
+					temp1 = new LinkedList<>(numbers);
 
-                long end = System.nanoTime();
-                temp1 = new LinkedList<>(numbers);
+					long timeForNoimp = end - start;
+					writer.println(i + "," + timeForNoimp);
+				}
+			} else {
+				for (int i = 0; i < n; i++) {
+					LinkedList<Integer> temp1 = new LinkedList<>(numbers);
+					long start = System.nanoTime();
 
-                long timeForNoimp = end - start;
-                writer.println(i + "," + timeForNoimp);
-            }
+					sortC(temp1);
+
+					long end = System.nanoTime();
+					temp1 = new LinkedList<>(numbers);
+
+					long timeForNoimp = end - start;
+					writer.println(i + "," + timeForNoimp);
+				}	
+			}
+
 
         } catch (IOException e) {
             System.out.println("Error writing file: " + e.getMessage());
