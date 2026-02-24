@@ -33,7 +33,10 @@ for i in range(python_n):
     percent = int((i/(python_n-1))*100)
     print(f"\r[{"█" * percent}{" " * (100-percent-1)}] {percent}%" , end="", flush=True)
 
-    subprocess.run(["java", "Measure",  inFile, java_results,  str(n), algoritm ])
+    if(jit == "jit"):
+        subprocess.run(["java", "Measure",  inFile, java_results,  str(n), algoritm])
+    else:
+        subprocess.run(["java", "Measure", "-Xint",  inFile, java_results,  str(n), algoritm])
 
     #läs ut-filen med 600 tider, räkna ut medelvärde i jämviktsläget, spara medelvärdet
     df = pd.read_csv(java_results)
