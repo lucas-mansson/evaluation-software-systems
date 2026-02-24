@@ -8,7 +8,7 @@ public class Measure{
 		int n = Integer.parseInt(args[2]);
 		LinkedList<Integer> numbers = read(inputFile);
 		try (PrintWriter writer = new PrintWriter(new FileWriter(outputFile))) {
-			writer.println("index;timeNoImp;timeImp;");
+			writer.println("index,time");
 			for(int i = 0; i < n; i++){
 				LinkedList<Integer> temp1 = new LinkedList<>(numbers);
 				long start = System.nanoTime();
@@ -16,10 +16,11 @@ public class Measure{
 				long end = System.nanoTime();
 				temp1 = new LinkedList<>(numbers);
 				long timeForNoimp = end - start;
-				start = System.nanoTime();
-				sortOwn(temp1);
-				end = System.nanoTime();
-				writer.println(i + ";" + (timeForNoimp) + ";" + (end-start) + ";");
+				//start = System.nanoTime();
+				//sortOwn(temp1);
+				//end = System.nanoTime();
+				//writer.println(i + ";" + (timeForNoimp) + ";" + (end-start) + ";");
+				writer.println(i + "," + timeForNoimp);
 				System.out.println(i);
 			}
         	} catch (IOException e) {
