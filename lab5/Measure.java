@@ -12,7 +12,7 @@ public class Measure{
 			for(int i = 0; i < n; i++){
 				LinkedList<Integer> temp1 = new LinkedList<>(numbers);
 				long start = System.nanoTime();
-				sortC(temp1);
+				sortOwn(temp1);
 				long end = System.nanoTime();
 				temp1 = new LinkedList<>(numbers);
 				long timeForNoimp = end - start;
@@ -49,18 +49,26 @@ public class Measure{
 		return list;
 	}
 	public class ListSorter{
-		public static LinkedList<Integer> sort(LinkedList<Integer> list){
-			int n = list.size();
-			for (int i = 0; i < n - 1; i++) {
-            			for (int j = 0; j <( n - i - 1); j++) {
-                			if (list.get(j) > list.get(j + 1)) {
-                 				int temp = list.get(j);
-		    	                	list.set(j, list.get(j + 1));
-                    				list.set(j + 1, temp);
-                			}
-            			}
-        		}
-			return list;
+
+		public static LinkedList<Integer> sort(LinkedList<Integer> list) {
+
+    			LinkedList<Integer> sorted = new LinkedList<>();
+
+    			for (Integer value : list) {
+
+        			if (sorted.isEmpty()) {
+            				sorted.add(value);
+            				continue;
+        			}
+
+        			int index = 0;
+        			while (index < sorted.size() && sorted.get(index) <= value) {
+            				index++;
+        			}
+
+        			sorted.add(index, value);
+    			}
+    			return sorted;
 		}
 	}
 }
