@@ -13,7 +13,7 @@ public class Measure {
         try (PrintWriter writer = new PrintWriter(new FileWriter(outputFile))) {
 
             writer.println("index,time");
-			if(algo == "own"){
+			if(algo.equals( "own")){
 				for (int i = 0; i < n; i++) {
 					LinkedList<Integer> temp1 = new LinkedList<>(numbers);
 					long start = System.nanoTime();
