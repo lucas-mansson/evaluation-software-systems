@@ -67,31 +67,37 @@ public class Measure {
     }
 
     public static LinkedList<Integer> sortOwn(LinkedList<Integer> list) {
-        ListSorter.sort(list);
-        return list;
+        LinkedList<Integer> temp = ListSorter.mergeSort(list);
+        return temp;
     }
-
+    private static boolean isSorted(LinkedList<Integer> list){
+        for (int i = 0; i < list.size() - 1; i++) {
+            if (list.get(i) > list.get(i + 1)) return false;
+        }
+        return true;
+    }
     public class ListSorter {
-
-        public static LinkedList<Integer> sort(LinkedList<Integer> list) {
-
-            LinkedList<Integer> sorted = new LinkedList<>();
-
-            for (Integer value : list) {
-
-                if (sorted.isEmpty()) {
-                    sorted.add(value);
-                    continue;
+        public static LinkedList<Integer> mergeSort(LinkedList<Integer> list) {
+            if (list.size() <= 1) return list;
+            int mid = list.size() / 2;
+            LinkedList<Integer> left  = new LinkedList<>(list.subList(0, mid));
+            LinkedList<Integer> right = new LinkedList<>(list.subList(mid, list.size()));
+            left  = mergeSort(left);
+            right = mergeSort(right);
+            return merge(left, right);
+        }
+        private static LinkedList<Integer> merge(LinkedList<Integer> left, LinkedList<Integer> right) {
+            LinkedList<Integer> result = new LinkedList<>();
+            while (!left.isEmpty() && !right.isEmpty()) {
+                if (left.peek() <= right.peek()) {
+                    result.add(left.poll());
+                } else {
+                    result.add(right.poll());
                 }
-
-                int index = 0;
-                while (index < sorted.size() && sorted.get(index) <= value) {
-                    index++;
-                }
-
-                sorted.add(index, value);
             }
-            return sorted;
+            result.addAll(left);
+            result.addAll(right);
+            return result;
         }
     }
 }

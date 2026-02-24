@@ -23,10 +23,10 @@ if(jit not in ["jit", "no_jit"]):
     raise Error("jit must be 'jit' or 'no-jit'")
 
 # run the experiment
-inFile = "data1.txt"
+inFile = "data2.txt"
 n=600
 java_results = f"{algoritm}.sort-{inFile}-{n}.csv"
-python_averages = f"averages_{python_n}_{algoritm}_{jit}.csv"
+python_averages = f"averages_{python_n}_{algoritm}_{jit}_data2.csv"
 
 averages = []
 for i in range(python_n): 
